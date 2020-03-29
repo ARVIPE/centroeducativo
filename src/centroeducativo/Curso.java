@@ -57,6 +57,11 @@ public class Curso extends Entidad implements Serializable {
 
 		return materia;
 	}
+	
+	@Override
+	public String toString() {
+		return descripcion;
+	}
 
 	public Materia removeMateria(Materia materia) {
 		getMaterias().remove(materia);
