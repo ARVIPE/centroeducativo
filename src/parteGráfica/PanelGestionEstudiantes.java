@@ -133,6 +133,7 @@ public class PanelGestionEstudiantes extends JPanel {
 		this.actual.setEmail(this.panelDatosPersonales.getEmail());
 		this.actual.setTipologiasexo(this.panelDatosPersonales.getTipologiaSexo());
 		this.actual.setColor(this.panelDatosPersonales.getColorElegido());
+		this.actual.setImagen(this.panelDatosPersonales.getImagen());
 		
 		if(actual.getId() == 0) {
 			EstudianteControlador.getInstancia().persist(actual);
@@ -185,6 +186,7 @@ public class PanelGestionEstudiantes extends JPanel {
 			panelDatosPersonales.setEmail(this.actual.getEmail());
 			panelDatosPersonales.setTipologiaSexo(this.actual.getTipologiasexo());
 			panelDatosPersonales.setColorElegido(this.actual.getColor());
+			panelDatosPersonales.setImagen(this.actual.getImagen());
 		}
 	}
 

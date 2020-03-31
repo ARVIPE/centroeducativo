@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import model.Profesor;
+import model.controladores.ProfesorControlador;
 import utils.CacheImagenes;
 
 public class PanelGestionProfesores extends JPanel {
@@ -27,7 +29,7 @@ public class PanelGestionProfesores extends JPanel {
 
 	public PanelGestionProfesores() {
 		
-		actual = EstudianteControlador.getInstancia().findFirst();
+		actual = ProfesorControlador.getInstancia().findFirst();
 		cargarDatosActual();
 		
 		this.setLayout(new BorderLayout());
@@ -84,15 +86,15 @@ public class PanelGestionProfesores extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				Estudiante obtenido = null;
+				Profesor obtenido = null;
 				if (funcion == LOAD_FIRST)
-					obtenido = EstudianteControlador.getInstancia().findFirst();
+					obtenido = ProfesorControlador.getInstancia().findFirst();
 				if (funcion == LOAD_PREV)
-					obtenido = EstudianteControlador.getInstancia().findPrevious(actual);
+					obtenido = ProfesorControlador.getInstancia().findPrevious(actual);
 				if (funcion == LOAD_NEXT)
-					obtenido = EstudianteControlador.getInstancia().findNext(actual);
+					obtenido = ProfesorControlador.getInstancia().findNext(actual);
 				if (funcion == LOAD_LAST)
-					obtenido = EstudianteControlador.getInstancia().findLast();
+					obtenido = ProfesorControlador.getInstancia().findLast();
 				if (funcion == NEW)
 					nuevo();
 				if (funcion == SAVE)
@@ -113,7 +115,7 @@ public class PanelGestionProfesores extends JPanel {
 	 */
 	private void nuevo() {
 		this.panelDatosPersonales.limpiarPantalla();
-		this.actual = new Estudiante();
+		this.actual = new Profesor();
 		JOptionPane.showMessageDialog(this, "Introduzca los datos nuevos");
 	}
 
@@ -131,12 +133,13 @@ public class PanelGestionProfesores extends JPanel {
 		this.actual.setEmail(this.panelDatosPersonales.getEmail());
 		this.actual.setTipologiasexo(this.panelDatosPersonales.getTipologiaSexo());
 		this.actual.setColor(this.panelDatosPersonales.getColorElegido());
+		this.actual.setImagen(this.panelDatosPersonales.getImagen());
 		
 		if(actual.getId() == 0) {
-			EstudianteControlador.getInstancia().persist(actual);
+			ProfesorControlador.getInstancia().persist(actual);
 		}
 		else {
-			EstudianteControlador.getInstancia().merge(actual);
+			ProfesorControlador.getInstancia().merge(actual);
 		}
 		JOptionPane.showMessageDialog(this, "Guardado estupendamente");
 	}
@@ -145,18 +148,18 @@ public class PanelGestionProfesores extends JPanel {
 	 * 
 	 * @return
 	 */
-	private Estudiante eliminar() {
+	private Profesor eliminar() {
 		String respuestas[] = new String[] { "S�", "No" };
 		int opcionElegida = JOptionPane.showOptionDialog(null, "�Realmente quiere eliminar el registro?",
 				"Eliminar registro", JOptionPane.OK_CANCEL_OPTION, JOptionPane.OK_CANCEL_OPTION,
 				CacheImagenes.getCacheImagenes().getIcono("confirm.png"), respuestas, respuestas[1]);
 
 		if (opcionElegida == 0) {
-			Estudiante nuevoAMostrar = EstudianteControlador.getInstancia().findFirst();
+			Profesor nuevoAMostrar = ProfesorControlador.getInstancia().findFirst();
 			if (nuevoAMostrar == null) {
-				nuevoAMostrar = EstudianteControlador.getInstancia().findNext(actual);
+				nuevoAMostrar = ProfesorControlador.getInstancia().findNext(actual);
 			}
-			EstudianteControlador.getInstancia().remove(actual);
+			ProfesorControlador.getInstancia().remove(actual);
 			JOptionPane.showMessageDialog(this, "Eliminado correctamente");
 
 			if (nuevoAMostrar != null) {
@@ -183,6 +186,7 @@ public class PanelGestionProfesores extends JPanel {
 			panelDatosPersonales.setEmail(this.actual.getEmail());
 			panelDatosPersonales.setTipologiaSexo(this.actual.getTipologiasexo());
 			panelDatosPersonales.setColorElegido(this.actual.getColor());
+			panelDatosPersonales.setImagen(this.actual.getImagen());
 		}
 	}
 

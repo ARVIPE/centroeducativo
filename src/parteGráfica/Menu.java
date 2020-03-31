@@ -25,14 +25,15 @@ public class Menu extends JMenuBar {
 		//Menú Archivo de la aplicación
 		JMenu menu = new JMenu("Entidades");
 		
-		menu.add(crearMenuLanzamiento("Gestión de cursos académicos", new PanelGestionCursosAcademicos()));
-		menu.add(crearMenuLanzamiento("Gestión de estudiantes", new PanelGestionEstudiantes()));
-		menu.add(crearMenuLanzamiento("Gestión de materia", new PanelGestionMateria()));
+		menu.add(crearMenuLanzamiento(1, "Gestión de cursos", new PanelGestionCursosAcademicos()));
+		menu.add(crearMenuLanzamiento(2 ,"Gestión de estudiantes", new PanelGestionEstudiantes()));
+		menu.add(crearMenuLanzamiento(3, "Gestión de materia", new PanelGestionMateria()));
+		menu.add(crearMenuLanzamiento(4, "Gestión de profesores", new PanelGestionProfesores()));
 
 		this.add(menu);
 	}
 	
-	private JMenuItem crearMenuLanzamiento(String titulo, JPanel panel) {
+	private JMenuItem crearMenuLanzamiento(int num, String titulo, JPanel panel) {
 		JMenuItem mi = new JMenuItem(titulo);
 		mi.addActionListener(new ActionListener() {
 			@Override

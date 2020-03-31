@@ -1,11 +1,14 @@
-package parteGráfica;
+package parteGrÃ¡fica;
 
-import java.awt.Dimension;			
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
@@ -19,38 +22,47 @@ public class ToolBar extends JToolBar {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ToolBar () {
-        this.add(creaBoton(0, "", "ruedadentada.png", "rueda"));
+
+	public ToolBar() {
+		this.add(crearBoton(0, "Curso", "conectado.png", "Ir a curso", new PanelGestionCursosAcademicos()));
+		this.add(crearBoton(1, "Materia", "conectado.png", "Ir a materia", new PanelGestionMateria()));
+		this.add(crearBoton(2, "Estudiante", "conectado.png", "Ir a estudiante", new PanelGestionEstudiantes()));
+		this.add(crearBoton(3, "Profesor", "conectado.png", "Ir profesor", new PanelGestionProfesores()));
+		
 	}
 
-	
-	/**
-	 * 
-	 * @param titulo
-	 * @param icono
-	 * @return
-	 */
-	private JButton creaBoton(int num, String titulo, String icono, String toolTip) {
-        JButton jbt = new JButton();
-        
-        jbt.setText(titulo);
-        jbt.setToolTipText(toolTip);
-        
-        jbt.addActionListener(new ActionListener(){
+	private JButton crearBoton(int num, String titulo, String icono, String toolTip, JPanel panel) {
+		JButton jbt = new JButton(titulo);
+		
+		jbt.setText(titulo);
+		jbt.setToolTipText(toolTip);
+		
+		jbt.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//            	VentanaPrincipal.jTabbedPane.setSelectedIndex(num);
-            	System.out.println("Has hecho clic en el botón: \"" + toolTip + "\"");
-            }
-        });
-        
-        try {
-        	jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));  
-          } catch (Exception ex) {
-        	  ex.printStackTrace();
-          }
-        return jbt;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialogo = new JDialog();
+				dialogo.setResizable(true);
+				dialogo.setTitle(titulo);
+				dialogo.setContentPane(panel);
+				dialogo.pack();
+				dialogo.setModal(true);
+				dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2,
+						(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - dialogo.getHeight()/2);
+				dialogo.setVisible(true);
+			}
+			
+		});
+		
+		try {
+			jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jbt;
 	}
 	
+
 }
+

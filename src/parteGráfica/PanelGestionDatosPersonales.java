@@ -62,7 +62,7 @@ public class PanelGestionDatosPersonales extends JPanel{
 	
 		
 		// a�adimos los campos para nombre
-		c.fill = GridBagConstraints.NONE;
+		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -72,32 +72,10 @@ public class PanelGestionDatosPersonales extends JPanel{
 		
 		c.gridx = 1;
 		c.gridy = 1;
+		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfNombre, c);
 		
-		c.gridx = 2;
-		c.gridy = 1;
-		jtfDireccion.setEnabled(true);
-		c.anchor = GridBagConstraints.WEST;
-		c.insets = new Insets(0, 0, 5, 5);
-		//Le damos unas dimensiones al scroll
-		jsp.setPreferredSize( new Dimension(100, 100));
-		this.add(jsp, c);
-
-		jbtCambiarImg = new JButton("Elegir imagen");
-		jbtCambiarImg.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				seleccionaFichero(getImagen());
-			}
-		});
-
-		c.gridx = 2;
-		c.gridy = 2;
-		c.anchor = GridBagConstraints.WEST;
-		this.add(jbtCambiarImg, c);
 		
 		// a�adimos los campos para primerApellido
 		c.gridx = 0;
@@ -108,6 +86,7 @@ public class PanelGestionDatosPersonales extends JPanel{
 		
 		c.gridx = 1;
 		c.gridy = 2;
+		c.gridheight = 1;
 		jtfPrimerApellido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfPrimerApellido, c);
@@ -147,13 +126,12 @@ public class PanelGestionDatosPersonales extends JPanel{
 		
 		c.gridx = 1;
 		c.gridy = 5;
-		c.gridwidth = 2;
+		c.gridwidth = 1;
 		jtfDireccion.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfDireccion, c);
 		
 		// a�adimos los campos para Tel�fono
-		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 6;
 		c.gridwidth = 1;
@@ -180,12 +158,11 @@ public class PanelGestionDatosPersonales extends JPanel{
 		this.add(jtfEMail, c);
 		
 		JLabel lblsexo = new JLabel("Sexo: ");
-		GridBagConstraints gbc_lblsexo = new GridBagConstraints();
-		gbc_lblsexo.gridx = 0;
-		gbc_lblsexo.gridy = 8;
-		gbc_lblsexo.gridwidth = 1;
-		gbc_lblsexo.anchor = GridBagConstraints.EAST;
-		add(lblsexo, gbc_lblsexo);
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		add(lblsexo, c);
 
 		c.gridx = 1;
 		c.gridy = 8;
@@ -198,7 +175,6 @@ public class PanelGestionDatosPersonales extends JPanel{
 		}
 		
 	
-		// a�adimos los campos para Color
 		c.gridx = 0;
 		c.gridy = 9;
 		c.gridwidth = 1;
@@ -223,6 +199,30 @@ public class PanelGestionDatosPersonales extends JPanel{
 
 			}
 		});
+		
+		c.gridx = 2;
+		c.gridy = 0;
+		jtfDireccion.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		c.insets = new Insets(0, 0, 5, 5);
+		//Le damos unas dimensiones al scroll
+		jsp.setPreferredSize( new Dimension(100, 100));
+		this.add(jsp, c);
+
+		jbtCambiarImg = new JButton("Elegir imagen");
+		jbtCambiarImg.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				seleccionaFichero(getImagen());
+			}
+		});
+
+		c.gridx = 2;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.WEST;
+		this.add(jbtCambiarImg, c);
 		
 	
 		
@@ -434,6 +434,7 @@ public class PanelGestionDatosPersonales extends JPanel{
 		this.jtfEMail.setText("");
 		this.jcbSexo.setSelectedIndex(0);
 		this.setBackground(Color.gray);
+		this.jsp.setViewportView(null);
 	}
 
 	public String getNombre() {
@@ -532,7 +533,6 @@ public class PanelGestionDatosPersonales extends JPanel{
 		try {
 			this.setBackground(Color.decode(colorElegido));
 		} catch (Exception e) {
-			System.out.println("No cambio");
 			this.setBackground(Color.GRAY);
 		}
 	}
