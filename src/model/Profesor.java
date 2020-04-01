@@ -136,6 +136,12 @@ public class Profesor extends Entidad implements Serializable {
 	public void setTipologiasexo(Tipologiasexo tipologiasexo) {
 		this.tipologiasexo = tipologiasexo;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return nombre + " " +  apellido1 + " " + apellido2;
+	}
 
 	public List<Valoracionmateria> getValoracionmaterias() {
 		return this.valoracionmaterias;

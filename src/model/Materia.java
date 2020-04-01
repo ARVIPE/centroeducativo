@@ -64,6 +64,12 @@ public class Materia extends Entidad implements Serializable {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 
 	public List<Valoracionmateria> getValoracionmaterias() {
 		return this.valoracionmaterias;
