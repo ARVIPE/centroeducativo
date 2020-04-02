@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import model.Curso;
@@ -21,6 +22,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,20 +31,12 @@ import java.awt.GridBagConstraints;
 
 public class PanelGestionValoracionMateria extends JPanel{
 	
-	public static int LOAD_FIRST = 0;
-	public static int LOAD_PREV = 1;
-	public static int LOAD_NEXT = 2;
-	public static int LOAD_LAST = 3;
-	public static int NEW = 4;
-	public static int SAVE = 5;
-	public static int REMOVE = 6;
-	
+	JScrollPane pnlValoraciones = new JScrollPane();
 	Valoracionmateria actual = null;
-
 	JComboBox<Profesor> jcbProfesor = new JComboBox<Profesor>();
 	JComboBox<Materia> jcbMateria = new JComboBox<Materia>();
 	JButton jbtRefrescarAlumno = new JButton("Botón refrescar alumno");
-	
+	List<SlotValoracionEstudiante> panelesValoracionEstudiante = new ArrayList<SlotValoracionEstudiante>();
 	
 	public PanelGestionValoracionMateria() {
 		
@@ -50,33 +44,11 @@ public class PanelGestionValoracionMateria extends JPanel{
 		cargarDatosActual();
 		
 		this.setLayout(new BorderLayout());
-//		this.add(getToolBar(), BorderLayout.NORTH);
 		this.add(getPanelGestion(), BorderLayout.NORTH);
-		this.add(getPanelGestionAlumnos(), BorderLayout.CENTER);
-		
+	
 		
 	}
 	
-	private JPanel getPanelGestionAlumnos() {
-		JPanel panelGestionAlumnos = new JPanel();
-		panelGestionAlumnos.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
-		
-		int i = 2;
-		List<Estudiante> est = EstudianteControlador.getInstancia().findAllEstudiantes();
-		for (Estudiante e : est) {
-			c.fill = GridBagConstraints.BOTH;
-			c.gridx = 0;
-			c.gridy = 0 + i;
-			panelGestionAlumnos.add(new JLabel(e.toString() + ":"), c);
-			i++;
-		}
-		
-		
-		
-		return panelGestionAlumnos;
-	}
 
 	private JPanel getPanelGestion() {
 		JPanel panelGestion = new JPanel();
@@ -118,6 +90,7 @@ public class PanelGestionValoracionMateria extends JPanel{
 		for (Profesor pr : profesores) {
 			jcbProfesor.addItem(pr);
 		}
+		
 
 		c.gridx = 2;
 		c.gridy = 9;
@@ -128,13 +101,38 @@ public class PanelGestionValoracionMateria extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 System.out.println("Pulsaste el botón");
+				System.out.println("ha pulsado el boton");
 
 			}
 		});
+		
+		c.gridx = 0;
+		c.gridy = 5;
+		panelGestion.add(pnlValoraciones, c);
+		pnlValoraciones.setViewportView(getPanelGestionAlumnos());
 
 		return panelGestion;
 	}
+	
+	private JPanel getPanelGestionAlumnos() {
+	JPanel panelGestionAlumnos = new JPanel();
+	panelGestionAlumnos.setLayout(new GridBagLayout());
+	GridBagConstraints c = new GridBagConstraints();
+	
+	
+	int i = 2;
+	for (SlotValoracionEstudiante s : panelesValoracionEstudiante) {
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		c.gridy = 0 + i;
+		panelGestionAlumnos.add(new JLabel(s.toString() + ":"), c);
+		i++;
+	}
+	
+	
+	
+	return panelGestionAlumnos;
+}
 	
 	
 	/**
