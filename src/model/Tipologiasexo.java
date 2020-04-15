@@ -76,12 +76,6 @@ public class Tipologiasexo extends Entidad implements Serializable {
 	public void setProfesors(List<Profesor> profesors) {
 		this.profesors = profesors;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return descripcion;
-	}
 
 	public Profesor addProfesor(Profesor profesor) {
 		getProfesors().add(profesor);
@@ -96,5 +90,12 @@ public class Tipologiasexo extends Entidad implements Serializable {
 
 		return profesor;
 	}
+	
+	@Override
+	public String toString() {
+		return descripcion;
+	}
+	
+	
 
 }

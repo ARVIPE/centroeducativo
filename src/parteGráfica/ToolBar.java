@@ -29,6 +29,7 @@ public class ToolBar extends JToolBar {
 		this.add(crearBoton(2, "Estudiante", "conectado.png", "Ir a estudiante", new PanelGestionEstudiantes()));
 		this.add(crearBoton(3, "Profesor", "conectado.png", "Ir profesor", new PanelGestionProfesores()));
 		this.add(crearBoton(4, "Valoración Materia", "conectado.png", "Ir al materia", new PanelGestionValoracionMateria()));
+		this.add(crearBoton(5, "Valoracion masiva Materia", "conectado.png", "Ir a la valoracion", new PanelGestionValoracionMasivaEstudiantes()));
 	}
 
 	private JButton crearBoton(int num, String titulo, String icono, String toolTip, JPanel panel) {

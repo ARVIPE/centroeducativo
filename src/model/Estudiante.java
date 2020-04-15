@@ -96,13 +96,6 @@ public class Estudiante extends Entidad implements Serializable {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
-
-	
-	@Override
-	public String toString() {
-		return nombre + " " +  apellido1 + " " + apellido2;
-	}
 
 	public String getEmail() {
 		return this.email;
@@ -164,6 +157,11 @@ public class Estudiante extends Entidad implements Serializable {
 		valoracionmateria.setEstudiante(null);
 
 		return valoracionmateria;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre + " " +  apellido1 + " " + apellido2;
 	}
 
 }

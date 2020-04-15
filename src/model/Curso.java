@@ -50,12 +50,6 @@ public class Curso extends Entidad implements Serializable {
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return descripcion;
-	}
 
 	public Materia addMateria(Materia materia) {
 		getMaterias().add(materia);
@@ -70,5 +64,14 @@ public class Curso extends Entidad implements Serializable {
 
 		return materia;
 	}
+
+	@Override
+	public String toString() {
+		return descripcion;
+	}
+
+
+	
+	
 
 }

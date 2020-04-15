@@ -18,6 +18,7 @@ public class Sequence implements Serializable {
 	@Column(name="SEQ_COUNT")
 	private int seqCount;
 
+
 	@Column(name="SEQ_NAME")
 	private String seqName;
 
@@ -32,7 +33,6 @@ public class Sequence implements Serializable {
 	public void setSeqCount(int seqCount) {
 		this.seqCount = seqCount;
 	}
-
 
 	public String getSeqName() {
 		return this.seqName;
