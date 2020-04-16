@@ -45,7 +45,7 @@ public class PanelGestionValoracionMateria extends JPanel {
 
 
 	public PanelGestionValoracionMateria() {
-		super();
+		//super();
 		this.setLayout(new BorderLayout());
 		this.add(getPanelGestion(), BorderLayout.CENTER);
 
